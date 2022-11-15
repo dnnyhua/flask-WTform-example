@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <title>New Employee</title>
+</head>
+<body>
+  <div class="container">
+    <h1 class="display-1 text-center" >Add New Employee</h1>
+    <div class="row justify-content-center">
+      <div class="col-sm-8">
+        <form method="POST">
+        
+          <!-- all hidden fields will be here -->
+          {{ form.hidden_tag() }}
+        
+          <!-- field.widget.input_type... is needed so that we do not render any hidden fields. 
+            Without it every field will be rendered -->
+          {% for field in form if field.widget.input_type != 'hidden' %}
+          <div class="form-group mt-3">
+            {{field.label}}
+            {{field(class_="form-control")}}
+            {% for err in field.errors %}
+            <!-- use small tags to have error message display under the respective input field -->
+            <small class="form-text text-danger">{{err}}</small>
+            {% endfor %}
+          </div>
+          {% endfor %}
+          <a href="/phones" class="btn btn-lg btn-danger mt-3">Back</a>
+          <button class="btn btn-success btn-lg mt-3">Submit</button>
+        </form>
+      </div>
+  </div>
+</body>
+</html>
